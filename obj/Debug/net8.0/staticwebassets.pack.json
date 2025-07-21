@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
+      "Id": "/Users/dedeepreddy/RiderProjects/BookStore/wwwroot/data/BookStore.db",
+      "PackagePath": "staticwebassets/data/BookStore.db"
+    },
+    {
       "Id": "/Users/dedeepreddy/RiderProjects/BookStore/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
     },

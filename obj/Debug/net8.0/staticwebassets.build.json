@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "as7PBjYjLQZukgG9EF0/w44aqhQ2r6s9/O6aENjEwyU=",
+  "Hash": "MBYynoZeI5wWpA9oFNU34c9ZAI/sls4DJ0hungZVjqM=",
   "Source": "BookStore",
   "BasePath": "_content/BookStore",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
+    },
+    {
+      "Identity": "/Users/dedeepreddy/RiderProjects/BookStore/wwwroot/data/BookStore.db",
+      "SourceId": "BookStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/dedeepreddy/RiderProjects/BookStore/wwwroot/",
+      "BasePath": "_content/BookStore",
+      "RelativePath": "data/BookStore.db",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/data/BookStore.db"
     },
     {
       "Identity": "/Users/dedeepreddy/RiderProjects/BookStore/wwwroot/favicon.ico",

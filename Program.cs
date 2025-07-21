@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add Razor Pages and SQLite
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BookStoreContext>(options =>
-    options.UseSqlite("Data Source=BookStore.db"));
+    options.UseSqlite("Data Source=wwwroot/data/BookStore.db"));
 
 var app = builder.Build();
 
