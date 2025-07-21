@@ -1,0 +1,19 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copy csproj and restore as distinct layers
+COPY *.sln .
+COPY BookStore/*.csproj ./BookStore/
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . .
+WORKDIR /app/BookStore
+RUN dotnet publish -c Release -o out
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/BookStore/out ./
+ENTRYPOINT ["dotnet", "BookStore.dll"]
