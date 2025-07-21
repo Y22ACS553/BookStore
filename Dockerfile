@@ -1,19 +1,27 @@
-# Build stage
+# Use the official .NET SDK image for building
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.sln .
-COPY BookStore/*.csproj ./BookStore/
+# Copy solution and project files
+COPY *.sln ./
+COPY *.csproj ./
+
+# Restore dependencies
 RUN dotnet restore
 
-# Copy everything else and build
-COPY . .
-WORKDIR /app/BookStore
+# Copy the rest of the source code
+COPY . ./
+
+# Build the application
 RUN dotnet publish -c Release -o out
 
-# Runtime stage
+# Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/BookStore/out ./
+
+COPY --from=build /app/out ./
+
+# Expose port (optional, but useful for local testing)
+EXPOSE 80
+
 ENTRYPOINT ["dotnet", "BookStore.dll"]
