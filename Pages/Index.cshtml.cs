@@ -21,24 +21,35 @@ namespace BookStore.Pages.Books
         [BindProperty]
         public Book Book { get; set; }
 
-        public List<Book> Books { get; set; }
+        public List<Book> Books { get; set; } = new();
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
         public Book EditBook { get; set; }
 
+        public bool IsSearch { get; set; } = false;
+        public bool NoResultsFound { get; set; } = false;
+
         public async Task OnGetAsync(string searchTerm = null)
         {
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                Books = await _context.Books.ToListAsync();
-            }
-            else
+            SearchTerm = searchTerm; // retain search term in URL or page
+            IsSearch = !string.IsNullOrEmpty(searchTerm);
+
+            if (IsSearch)
             {
                 Books = await _context.Books
                     .Where(b => b.Title.Contains(searchTerm))
                     .ToListAsync();
+
+                if (Books.Count == 0)
+                {
+                    NoResultsFound = true;
+                }
+            }
+            else
+            {
+                Books = await _context.Books.ToListAsync();
             }
         }
 

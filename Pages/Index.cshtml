@@ -76,14 +76,14 @@
         <button class="btn-blue" type="submit">🔍 Search</button>
         @if (!string.IsNullOrEmpty(Model.SearchTerm))
         {
-            <a href="/Books" class="btn-blue">Show All</a>
+            <a asp-page="/Books/Index" class="btn-blue">Show All</a>
         }
     </form>
 </div>
 
-@if (!string.IsNullOrEmpty(Model.SearchTerm) && Model.Books.Count == 0)
+@if (!string.IsNullOrEmpty(Model.SearchTerm) && (Model.Books == null || !Model.Books.Any()))
 {
-    <p>No results for the book you searched.</p>
+    <p><strong>Alaanti Book em ledhu bro.</strong></p>
 }
 
 @if (Model.Books != null && Model.Books.Any())
@@ -92,7 +92,12 @@
         @foreach (var book in Model.Books)
         {
             <div class="book-card">
-                <h4>@book.Title</h4>
+                @{
+                    string highlightedTitle = string.IsNullOrEmpty(Model.SearchTerm)
+                        ? book.Title
+                        : book.Title.Replace(Model.SearchTerm, $"<mark>{Model.SearchTerm}</mark>", StringComparison.OrdinalIgnoreCase);
+                }
+                <h4>@Html.Raw(highlightedTitle)</h4>
                 <p><strong>Author:</strong> @book.Author</p>
                 <p><strong>Price:</strong> ₹@book.Price</p>
                 <form method="post" asp-page-handler="Edit">
