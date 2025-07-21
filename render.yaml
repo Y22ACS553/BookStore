@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: bookstore
+    env: dotnet
+    buildCommand: dotnet build
+    startCommand: dotnet BookStore.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+    plan: free
